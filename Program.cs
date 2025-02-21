@@ -24,7 +24,7 @@ namespace NET_DiscordBot {
 
   public class Client {
     //// WebSocket connection to Discord bot API
-    private static DiscordSocketClient _client;
+    private static DiscordSocketClient? _client;
 
     //// Logging method
     private static Task Log(LogMessage msg) {
@@ -38,8 +38,9 @@ namespace NET_DiscordBot {
       // Log handler event for the discord client instance
       _client.Log += Log;
 
-      // Get the token from the env variable
-      var token = Environment.GetEnvironmentVariable("DISCORD_BOT_TOKEN");
+      // Load the environment variables from the .env file
+      DotNetEnv.Env.Load("./.env");
+      string? token = DotNetEnv.Env.GetString("DISCORD_BOT_TOKEN");
       if (String.IsNullOrEmpty(token)) {
         Console.WriteLine("No token found. Exiting.");
         return;
@@ -50,13 +51,15 @@ namespace NET_DiscordBot {
 
       Console.WriteLine("Bot is now running.");
       await Task.Delay(-1);
+      // await MainAsync();
     }
 
     public static async Task MainAsync() {
       var _config = new DiscordSocketConfig { MessageCacheSize = 100 };
       _client = new DiscordSocketClient(_config);
 
-      await _client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("DISCORD_BOT_TOKEN"));
+      DotNetEnv.Env.Load("./.env");
+      await _client.LoginAsync(TokenType.Bot, DotNetEnv.Env.GetString("DISCORD_BOT_TOKEN"));
       await _client.StartAsync();
 
       _client.MessageUpdated += MessageUpdated;
