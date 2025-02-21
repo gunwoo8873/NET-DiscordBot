@@ -1,7 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using Microsoft.VisualBasic;
 
 namespace NET_DiscordBot {
   public class LoggingService {
