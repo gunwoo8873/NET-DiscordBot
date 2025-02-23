@@ -7,6 +7,7 @@
   `2025. 02. 13.`
 * Description
   `The C# Language for Discord bot`
+> [Discord-Bot Rust.ver](https://github.com/gunwoo8873/Rust-DiscordBot)
 
 ## .NET useing for lib
 ```csproj
@@ -19,7 +20,6 @@
 # Path : ./NET-DiscordBot/.env
 DISCORD_BOT_TOKEN=YOUR_DISCORD_BOT_TOKEN
 ```
-
 
 ## Yolo Project useing for setup guide
 ### .NET
